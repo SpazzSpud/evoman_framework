@@ -13,10 +13,10 @@ if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
 hidden_neurons = 10
-n_vars = None  # Will be set dynamically for each enemy
-npop = 100  # Population size
-gens = 30   # Number of generations
-F = 0.8     # Mutation factor
+n_vars = None  # set dynamically for each enemy
+npop = 100  # population size
+gens = 30   # number of generations
+F = 0.6     # mutation factor
 CR = 0.8    # Crossover probability
 dom_l, dom_u = -1, 1  
 enemies = [2, 5, 8]
@@ -64,7 +64,7 @@ for enemy in enemies:
         pop = np.random.uniform(dom_l, dom_u, (npop, n_vars))
         fit_pop = evaluate_population(env, pop)
         
-        de_avg_fitness = []  # Store average fitness per generation
+        de_avg_fitness = []  # store average fitness per generation
         for gen in range(gens):
             new_pop = np.copy(pop)
             new_fit_pop = np.copy(fit_pop)

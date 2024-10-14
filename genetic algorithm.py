@@ -19,11 +19,11 @@ if not os.path.exists(experiment_name):
 hidden_neurons = 10
 population_size = 100
 generations = 30
-mutation_rate = 0.05  # Mutation probability
-dom_u = 1       # Upper limit for weight values
-dom_l = -1      # Lower limit for weight values
-enemies = [2, 5, 8]  # List of enemies
-runs_per_enemy = 5
+mutation_rate = 0.6
+dom_u = 1
+dom_l = -1
+enemies = [2, 5, 8] # select enemies to train against
+runs_per_enemy = 5 # select number of runs
 
 def simulation(env, individual):
     f, p, e, t = env.play(pcont=individual)
@@ -33,7 +33,7 @@ def normalize(x, fit_pop):
     if max(fit_pop) - min(fit_pop) > 0:
         return (x - min(fit_pop)) / (max(fit_pop) - min(fit_pop))
     else:
-        return 0.0000000001  # Prevent division by zero
+        return 0.0000000001 # no div by 0
 
 def evaluate(population):
     return np.array([simulation(env, individual) for individual in population])
@@ -83,7 +83,7 @@ for enemy in enemies:
         population = initialize_population()
         fitnesses = evaluate(population)
 
-        ga_avg_fitness = []  # Store average fitness per generation
+        ga_avg_fitness = []  # store average fitness per generation
         for generation in range(1, generations + 1):
             avg_fitness = np.mean(fitnesses)
             ga_avg_fitness.append(avg_fitness)
